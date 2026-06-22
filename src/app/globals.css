@@ -85,31 +85,29 @@ input, select, textarea {
 }
 
 /* ============================================================
-   HERO — STICKY FADE / BLUR ON SCROLL
+   HERO — SCROLL FADE VIA JS
    ============================================================ */
-.hero-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+.hero-section {
+  position: relative;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  z-index: 1;
   overflow: hidden;
 }
 
-.hero-sticky__inner {
+.hero-section .hero-content {
   text-align: center;
   position: relative;
   z-index: 2;
+  transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
 }
 
-.hero-scroll-spacer {
-  height: 100vh;
-  position: relative;
-  z-index: 2;
-  pointer-events: none;
+.hero-section.scrolled-past .hero-content {
+  opacity: 0;
+  transform: scale(0.97);
+  filter: blur(6px);
 }
 
 /* Amber glow orb */
@@ -133,19 +131,7 @@ input, select, textarea {
   50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
 }
 
-/* Scroll-driven hero fade (progressive enhancement) */
-@supports (animation-timeline: scroll()) {
-  @keyframes heroFadeBlur {
-    0% { opacity: 1; filter: blur(0px); transform: scale(1); }
-    100% { opacity: 0; filter: blur(16px); transform: scale(0.92); }
-  }
-
-  .hero-sticky__inner {
-    animation: heroFadeBlur linear both;
-    animation-timeline: scroll();
-    animation-range: 0vh 60vh;
-  }
-}
+/* Hero scroll fade handled by JS IntersectionObserver / scroll listener */
 
 /* ============================================================
    TEXT REVEAL — clip-path wipe

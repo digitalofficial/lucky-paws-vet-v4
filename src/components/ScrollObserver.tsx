@@ -5,21 +5,33 @@ import { useEffect } from "react";
 /**
  * Intersection Observer fallback for browsers that do not support
  * scroll-driven animations (animation-timeline: view() / scroll()).
- *
- * If @supports(animation-timeline: view()) is true the CSS handles
- * everything natively. This script only adds .io-visible / .io-hidden
- * classes when the browser lacks support.
+ * Also handles hero scroll-fade for all browsers.
  */
 export default function ScrollObserver() {
   useEffect(() => {
-    // Feature detect — if native scroll-driven animations work, bail out
-    if (CSS.supports("animation-timeline: view()")) return;
+    // Hero scroll fade — works in all browsers
+    const heroSection = document.querySelector(".hero-section");
+    let cleanupScroll: (() => void) | undefined;
+
+    if (heroSection) {
+      const handleScroll = () => {
+        if (window.scrollY > window.innerHeight * 0.3) {
+          heroSection.classList.add("scrolled-past");
+        } else {
+          heroSection.classList.remove("scrolled-past");
+        }
+      };
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      cleanupScroll = () => window.removeEventListener("scroll", handleScroll);
+    }
+
+    // IO fallback for other animations
+    if (CSS.supports("animation-timeline: view()")) return cleanupScroll;
 
     const targets = document.querySelectorAll(
       ".text-reveal, .parallax-slow, .scale-in, .clip-reveal"
     );
 
-    // Mark all targets as hidden initially
     targets.forEach((el) => {
       el.classList.add("io-hidden");
     });
@@ -38,7 +50,10 @@ export default function ScrollObserver() {
 
     targets.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    return () => {
+      cleanupScroll?.();
+      observer.disconnect();
+    };
   }, []);
 
   return null;

@@ -72,7 +72,7 @@ export default function Home() {
       <div className="flow-wrap">
 
         {/* ---------- HERO ---------- */}
-        <section className="hero-sticky" aria-label="Hero">
+        <section className="hero-section" aria-label="Hero">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1600&h=900&fit=crop"
@@ -83,7 +83,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0F0B14]/80 via-[#0F0B14]/60 to-[#0F0B14]/90" />
 
           <div className="hero-orb" />
-          <div className="hero-sticky__inner relative z-10">
+          <div className="hero-content relative z-10">
             <h1
               style={{
                 fontFamily: "var(--font-display)",
@@ -112,9 +112,6 @@ export default function Home() {
             </a>
           </div>
         </section>
-
-        {/* Spacer so sticky hero can fade as user scrolls past */}
-        <div className="hero-scroll-spacer" aria-hidden="true" />
 
         {/* ---------- SERVICES ---------- */}
         <section id="services" className="section-padding" aria-label="Services">
