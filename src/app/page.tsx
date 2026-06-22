@@ -73,8 +73,17 @@ export default function Home() {
 
         {/* ---------- HERO ---------- */}
         <section className="hero-sticky" aria-label="Hero">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1600&h=900&fit=crop"
+            alt="Two dogs running happily together"
+            className="absolute inset-0 w-full h-full object-cover"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0F0B14]/80 via-[#0F0B14]/60 to-[#0F0B14]/90" />
+
           <div className="hero-orb" />
-          <div className="hero-sticky__inner">
+          <div className="hero-sticky__inner relative z-10">
             <h1
               style={{
                 fontFamily: "var(--font-display)",
