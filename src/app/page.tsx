@@ -80,7 +80,7 @@ export default function Home() {
             className="absolute inset-0 w-full h-full object-cover"
             fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F0B14]/80 via-[#0F0B14]/60 to-[#0F0B14]/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0F0B14]/55 via-[#0F0B14]/35 to-[#0F0B14]/70" />
 
           <div className="hero-orb" />
           <div className="hero-content relative z-10">
@@ -91,6 +91,7 @@ export default function Home() {
                 fontWeight: 800,
                 marginBottom: 20,
                 lineHeight: 1.1,
+                textShadow: '0 2px 12px rgba(0,0,0,0.5)',
               }}
             >
               Healthy pets.
